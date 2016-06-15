@@ -49,8 +49,13 @@ static void prv_window_load(Window *window) {
 static void prv_inbox_received_handler(DictionaryIterator *iter, void *context) {
   Tuple *ready_tuple = dict_find(iter, MESSAGE_KEY_APP_READY);
   if (ready_tuple) {
-    // PebbleKitJS is ready, toggle the Lockitron
-    prv_lockitron_toggle_state();
+    if(launch_reason() != APP_LAUNCH_PHONE) {
+      // PebbleKitJS is ready, toggle the Lockitron
+      prv_lockitron_toggle_state();
+    } else {
+      // Application was just installed, or configured
+      text_layer_set_text(s_txt_layer, "App Installed");
+    }
     return;
   }
 
@@ -64,12 +69,17 @@ static void prv_inbox_received_handler(DictionaryIterator *iter, void *context) 
     snprintf(str, sizeof(str), "Door is now\n%s", prv_lockitron_status_message(&s_lockitron_state));
     text_layer_set_text(s_txt_layer, str);
 
-    // Get the system timeout duration
-    int timeout = preferred_result_display_duration();
-
-    // After the timeout, exit the application
-    AppTimer *timer = app_timer_register(timeout, prv_exit_application, NULL);
+    // Exit the application, after timeout
+    prv_exit_delay();
   }
+}
+
+static void prv_exit_delay() {
+  // Get the system timeout duration
+  int timeout = preferred_result_display_duration();
+
+  // After the timeout, exit the application
+  AppTimer *timer = app_timer_register(timeout, prv_exit_application, NULL);
 }
 
 static void prv_exit_application(void *data) {
