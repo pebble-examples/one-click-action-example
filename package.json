@@ -1,0 +1,32 @@
+{
+  "name": "Lockitron One Click",
+  "author": "MakeAwesomeHappen",
+  "version": "1.0.0",
+  "keywords": ["pebble-app"],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "Lockitron",
+    "uuid": "60dac362-3888-436d-96d2-17cb9d585033",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "messageKeys": [
+      "APP_READY",
+      "LOCK_STATE",
+      "LOCK_UUID",
+      "ACCESS_TOKEN"
+    ],
+    "resources": {
+      "media": []
+    }
+  }
+}
