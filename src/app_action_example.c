@@ -49,8 +49,8 @@ static void prv_window_load(Window *window) {
 static void prv_inbox_received_handler(DictionaryIterator *iter, void *context) {
   Tuple *ready_tuple = dict_find(iter, MESSAGE_KEY_APP_READY);
   if (ready_tuple) {
-    if(launch_reason() != APP_LAUNCH_PHONE) {
-      // PebbleKitJS is ready, toggle the Lockitron
+    if(launch_reason() == APP_LAUNCH_USER || launch_reason() == APP_LAUNCH_QUICK_LAUNCH) {
+      // Toggle the Lockitron!
       prv_lockitron_toggle_state();
     } else {
       // Application was just installed, or configured
