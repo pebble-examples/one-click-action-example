@@ -19,7 +19,7 @@ function toggleLockitronState(lock_uuid, access_token) {
     }
   });
 
-};
+}
 
 function sendResultToPebble(json) {
   if(json.state) {
@@ -28,7 +28,7 @@ function sendResultToPebble(json) {
       'LOCK_STATE': lockState
     });
   }
-};
+}
 
 function xhrWrapper(url, type, data, callback) {
   var xhr = new XMLHttpRequest();
@@ -42,4 +42,4 @@ function xhrWrapper(url, type, data, callback) {
   } else {
     xhr.send();
   }
-};
+}

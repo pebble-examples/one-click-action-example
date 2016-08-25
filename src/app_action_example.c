@@ -130,11 +130,11 @@ static void prv_update_app_glance(AppGlanceReloadSession *session, size_t limit,
   APP_LOG(APP_LOG_LEVEL_INFO, "STATE: %s", str);
 
   // Create the AppGlanceSlice (no icon, no expiry)
-  const AppGlanceSlice entry = (AppGlanceSlice) {
+  AppGlanceSlice entry = (AppGlanceSlice) {
     .layout = {
       .subtitle_template_string = str
     },
-    .expiration_time = APP_GLANCE_NO_EXPIRATION_TIME
+    .expiration_time = APP_GLANCE_SLICE_NO_EXPIRATION
   };
 
   // Add the slice, and check the result
